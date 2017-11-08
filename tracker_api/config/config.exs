@@ -25,3 +25,15 @@ config :logger, :console,
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
+
+config :guardian, Guardian,
+       allowed_algos: ["HS512"],
+       verify_module: Guardian.JWT,
+       issuer: "TrackerApi",
+       ttl: {30, :days},
+       verify_issuer: true,
+       serializer: TrackerApi.GuardianSerializer
+
+config :logger,
+       backends: [:console], # default, support for additional log sinks
+       compile_time_purge_level: :info # purges logs with lower level than this

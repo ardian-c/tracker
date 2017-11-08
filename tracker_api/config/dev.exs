@@ -36,10 +36,16 @@ config :logger, :console, format: "[$level] $message\n"
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
 
+config :tracker_api, :db, name: "tracker_api_dev"
+
 # Configure your database
 config :tracker_api, TrackerApi.Repo,
   # username: "mongodb",
   # password: "mongodb",
+  adapter: Mongo.Ecto,
   database: "tracker_api_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :guardian, Guardian,
+  secret_key: "+Ki/5u1XcL6fBW/7D17mt4o2mWhKa8c79Z5A1TwaLrVfTS8TD7MJoRhWlLyBrbWm"

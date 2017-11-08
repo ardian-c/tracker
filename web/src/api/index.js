@@ -4,9 +4,9 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 export default {
   user: {
-    login: credentials => axios.post(`${API_URL}/v1/auth`, { credentials }).then(res => res.data.user),
+    login: credentials => axios.post(`${API_URL}/v1/login`, { credentials }).then(res => res.data.user),
 
-    signup: user => axios.post(`${API_URL}/v1/users`, { user }).then(res => res.data.user),
+    signup: user => axios.post(`${API_URL}/v1/register`, { user }).then(res => res.data.user),
 
     confirm: token => axios.post(`${API_URL}/v1/auth/confirmation`, { token }).then(res => res.data.user),
 

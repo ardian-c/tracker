@@ -12,14 +12,16 @@ defmodule TrackerApi.Application do
       supervisor(TrackerApi.Repo, []),
       # Start the endpoint when the application starts
       supervisor(TrackerApiWeb.Endpoint, []),
-      # Start your own worker by calling: TrackerApi.Worker.start_link(arg1, arg2, arg3)
-      # worker(TrackerApi.Worker, [arg1, arg2, arg3]),
+
+      worker(Mongo, [[database: Application.get_env(:tracker_api, :db)[:name], name: :mongo]])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
     # for other strategies and supported options
     opts = [strategy: :one_for_one, name: TrackerApi.Supervisor]
-    Supervisor.start_link(children, opts)
+    result = Supervisor.start_link(children, opts)
+    TrackerApi.Startup.ensure_indexes
+    result
   end
 
   # Tell Phoenix to update the endpoint configuration

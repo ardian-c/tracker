@@ -21,10 +21,11 @@ defmodule TrackerApi.Mixfile do
     [
       mod: {TrackerApi.Application, []},
       applications: [
-        :phoenix, :phoenix_pubsub,
-        :phoenix_ecto, :mongodb,
+        :phoenix, :phoenix_pubsub, :gettext,
+        :phoenix_ecto, :mongodb, :mongodb_ecto, :ecto,
         :cowboy, :logger,
         :poolboy, :uuid,
+        :comeonin, :scrivener_ecto, :corsica
       ],
       extra_applications: [:runtime_tools]
     ]
@@ -39,14 +40,21 @@ defmodule TrackerApi.Mixfile do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.3.0"},
+      {:phoenix, "~> 1.2.1"},
+      {:plug, "~>1.3.5", override: true},
       {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, github: "phoenixframework/phoenix_ecto", ref: "v3.0.1"},
-      {:mongodb_ecto, github: "zeroasterisk/mongodb_ecto", branch: "elixir-ecto-v2.0.1"},
+      {:mongodb, ">= 0.0.0"},
+      {:mongodb_ecto, github: "ankhers/mongodb_ecto", branch: "ecto-2"},
+      {:ecto, "~> 2.0.0", override: true},
       {:gettext, "~> 0.11"},
       {:uuid, "~> 1.1" },
       {:timex, "~> 3.0"},
-      {:cowboy, "~> 1.0"}
+      {:cowboy, "~> 1.0"},
+      {:comeonin, "~> 2.5"},
+      {:guardian, "~> 0.14.0"},
+      {:corsica, "~> 0.5.0"},
+      {:scrivener_ecto, "~> 1.0"}
     ]
   end
 

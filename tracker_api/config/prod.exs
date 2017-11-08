@@ -59,6 +59,8 @@ config :logger, level: :info
 #     config :tracker_api, TrackerApiWeb.Endpoint, server: true
 #
 
+config :tracker_api, :db, "tracker_api_prod"
+
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
 import_config "prod.secret.exs"
