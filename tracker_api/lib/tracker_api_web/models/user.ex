@@ -10,12 +10,14 @@ defmodule TrackerApiWeb.User do
     field :email, :string
     field :password, :string, virtual: true
     field :encrypted_password, :string
+    field :is_confirmed, :string, default: "0"
+    field :confirmation_token, :string, default: ""
 
     timestamps()
   end
 
-  @required_fields ~w(email password)
-  @optional_fields ~w(encrypted_password)
+  @required_fields ~w(name email password)
+  @optional_fields ~w(encrypted_password is_confirmed confirmation_token)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
@@ -28,9 +30,14 @@ defmodule TrackerApiWeb.User do
     |> cast(params, @required_fields, @optional_fields)
     |> validate_format(:email, ~r/@/)
     |> validate_length(:password, min: 5)
-    #|> validate_confirmation(:password, message: "Password does not match")
+    |> validate_confirmation(:password, message: "Password does not match")
     |> unique_constraint(:email, message: "Email already taken", name: :email_idx)
     |> generate_encrypted_password
+  end
+
+  def confirmation_changeset(model, params \\ %{}) do
+    model
+    |> cast(params, [:confirmation_token, :is_confirmed])
   end
 
   defp generate_encrypted_password(current_changeset) do

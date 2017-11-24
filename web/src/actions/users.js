@@ -1,10 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 import api from '../api';
-import { userLoggedIn } from './auth';
+import { CURRENT_USER } from "../types/index"
 
-export const signup = data => dispatch =>
-    api.user.signup(data).then(user => {
-        console.log("user: ", user);
-        localStorage.trackerJWT = user.token;
-        dispatch(userLoggedIn(user));
-    });
+export const currentUser = () => dispatch => {
+        api.user.currentUser().then((data) => {
+            dispatch({
+                type: CURRENT_USER,
+                data
+            })
+        });
+    }

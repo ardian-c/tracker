@@ -4,7 +4,9 @@ defmodule TrackerApiWeb.UserView do
   def render("user.json", %{user: user}) do
     %{
       id: user.id,
-      email: user.email
+      name: user.name,
+      email: user.email,
+      confirmed: user.is_confirmed
     }
   end
 end

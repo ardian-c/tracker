@@ -25,7 +25,9 @@ defmodule TrackerApi.Mixfile do
         :phoenix_ecto, :mongodb, :mongodb_ecto, :ecto,
         :cowboy, :logger,
         :poolboy, :uuid,
-        :comeonin, :scrivener_ecto, :corsica
+        :comeonin, :scrivener_ecto, :corsica,
+        :bamboo, :bamboo_smtp,
+        :exq, :exq_ui
       ],
       extra_applications: [:runtime_tools]
     ]
@@ -54,6 +56,11 @@ defmodule TrackerApi.Mixfile do
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 0.14.0"},
       {:corsica, "~> 0.5.0"},
+      {:bamboo, "~> 0.8"},
+      {:bamboo_smtp, "~> 1.4.0"},
+      {:mailgun, "~> 0.1.2"},
+      {:exq, "~> 0.8.1"},
+      {:exq_ui, "~> 0.8.2"},
       {:scrivener_ecto, "~> 1.0"}
     ]
   end

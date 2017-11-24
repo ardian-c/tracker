@@ -2,7 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import ConfirmEmailMessage from '../messages/ConfirmEmailMessage';
+import TopNavigation from '../../components/navigation/TopNavigation';
 
 class DashboardPage extends React.Component {
     // componentDidMount = () => this.onInit(this.props);
@@ -10,23 +10,21 @@ class DashboardPage extends React.Component {
     // onInit = props => props.fetchLocations();
 
     render() {
-        const { isConfirmed } = this.props;
-
+        const { isAuthenticated } = this.props;
         return (
             <div>
-                {!isConfirmed && <ConfirmEmailMessage />}
-
+                {isAuthenticated && <TopNavigation/>}
             </div>
         );
     }
 }
 DashboardPage.propTypes = {
-    isConfirmed: PropTypes.bool.isRequired
+    isAuthenticated: PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
     return {
-        isConfirmed: !!state.user.confirmed
+        isAuthenticated: !!state.user.currentUser.confirmed
     };
 }
 

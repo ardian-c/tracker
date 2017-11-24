@@ -41,7 +41,17 @@ class LoginForm extends React.Component {
         const { data, errors, loading } = this.state;
 
         return (
-            <Form onSubmit={this.onSubmit} loading={loading}>
+            <div>
+            {/*
+              Heads up! The styles below are necessary for the correct render of this example.
+              You can do same with CSS, the main idea is that all the elements up to the `Grid`
+              below must have a height of 100%.
+            */}
+            <style>{`
+              .login-frm button { text-align: left; }
+              .login-frm label { text-align: left; }
+            `}</style>
+            <Form onSubmit={this.onSubmit} loading={loading} className="login-frm">
                 {errors.global && (
                     <Message negative>
                         <Message.Header>Something went wrong!</Message.Header>
@@ -74,6 +84,7 @@ class LoginForm extends React.Component {
                 </Form.Field>
                 <Button primary>Login</Button>
             </Form>
+            </div>
         );
     }
 }
